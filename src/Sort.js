@@ -1,16 +1,29 @@
 import React from "react";
-import { shuffle, range } from "lodash";
+import { shuffle, range, intersection } from "lodash";
 import { App, snapshot, done, clear } from "./sort-visualizer";
 
 import "./sort.css";
 
-function sort(array) {
-  // do cool stuff here
+function sort(nums) {
+  let swapped = false;
 
-  // call snapshot any time you do anything to the array
-  // it's okay if you call it with duplicate value array,
-  // it will deduplicate for you
-  snapshot(array);
+  do {
+    swapped = false;
+
+    for (let i = 0; i < nums.length; i++) {
+      snapshot(nums);
+
+      if (nums[i] > nums[i + 1]) {
+        swapped = true;
+
+        const tempNum = nums[i];
+        nums[i] = nums[i + 1];
+        nums[i + 1] = tempNum;
+      }
+    }
+  } while (swapped)
+
+  snapshot(nums);
 }
 
 export default function SortComponent() {
