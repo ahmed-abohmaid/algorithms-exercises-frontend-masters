@@ -1,27 +1,19 @@
 import React from "react";
-import { shuffle, range, intersection } from "lodash";
+import { shuffle, range } from "lodash";
 import { App, snapshot, done, clear } from "./sort-visualizer";
 
 import "./sort.css";
 
 function sort(nums) {
-  let swapped = false;
+  for (let i = 1; i < nums.length; i++) {
+    const temp = nums[i];
 
-  do {
-    swapped = false;
-
-    for (let i = 0; i < nums.length; i++) {
+    for (let j = i - 1; j >= 0 && nums[j] > temp; j--) {
       snapshot(nums);
-
-      if (nums[i] > nums[i + 1]) {
-        swapped = true;
-
-        const tempNum = nums[i];
-        nums[i] = nums[i + 1];
-        nums[i + 1] = tempNum;
-      }
+      nums[j + 1] = nums[j];
+      nums[j] = temp;
     }
-  } while (swapped)
+  }
 
   snapshot(nums);
 }
