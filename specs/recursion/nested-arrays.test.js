@@ -10,10 +10,34 @@
  */
 
 function nestedAdd(array) {
-  // write code here
+  /**
+   * Only Recursive Solution
+   */
+  // if (array.length > 0) {
+  //   if (Array.isArray(array[0])) {
+  //     return nestedAdd(array[0]) + nestedAdd(array.slice(1));
+  //   }
+
+  //   return array[0] + nestedAdd(array.slice(1));
+  // }
+
+  // return 0;
+
+  /**
+   * Recursive and Iterative Solution, it is faster
+   */
+  let sum = 0;
+  for (let i = 0; i < array.length; i++) {
+    const current = array[i];
+    if (Array.isArray(current)) {
+      sum += nestedAdd(current);
+    } else {
+      sum += current;
+    }
+  }
 }
 
-test.skip("nested arrays addition", () => {
+test("nested arrays addition", () => {
   expect(nestedAdd([1, 2, 3])).toEqual(6);
   expect(nestedAdd([1, [2], 3])).toEqual(6);
   expect(nestedAdd([[[[[[[[[5]]]]]]]]])).toEqual(5);
