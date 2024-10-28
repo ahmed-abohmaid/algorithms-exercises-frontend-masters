@@ -10,13 +10,28 @@
   factorial(3) = 6 
 */
 
-function factorial(n) {}
+function factorial(n) {
+  if (n > 1) {
+    return n * factorial(n - 1);
+  }
+  return 1;
+}
+
+/**
+ * More optimized factorial function for TCO
+ */
+function optFactorial(n, acc = 1) {
+  if (n === 0) {
+    return acc;
+  }
+  return optFactorial(n - 1, n * acc);
+}
 
 // unit tests
 // do not modify the below code
-test.skip("factorials", () => {
-  expect(factorial(1)).toEqual(1);
-  expect(factorial(2)).toEqual(2);
-  expect(factorial(3)).toEqual(6);
-  expect(factorial(10)).toEqual(3628800);
+test("factorials", () => {
+  expect(optFactorial(1)).toEqual(1);
+  expect(optFactorial(2)).toEqual(2);
+  expect(optFactorial(3)).toEqual(6);
+  expect(optFactorial(10)).toEqual(3628800);
 });
