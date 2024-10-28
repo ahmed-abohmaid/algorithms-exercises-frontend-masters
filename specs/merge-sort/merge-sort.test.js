@@ -11,26 +11,27 @@ const mergeSort = (nums) => {
     return nums;
   }
   const middle = Math.floor(nums.length / 2);
-  const leftResult = mergeSort(nums.slice(0, middle));
-  const rightResult = mergeSort(nums.slice(middle));
-  return merge(leftResult, rightResult);
+  const leftSortesdResult = mergeSort(nums.slice(0, middle));
+  const rightSortesdResult = mergeSort(nums.slice(middle));
+
+  return merge(leftSortesdResult, rightSortesdResult);
 };
 
-function merge(arr1, arr2) {
+function merge(leftArr, rightArr) {
   let result = [];
   let i = 0;
   let j = 0;
 
-  while (i < arr1.length && j < arr2.length) {
-    if (arr1[i] < arr2[j]) {
-      result.push(arr1[i]);
+  while (i < leftArr.length && j < rightArr.length) {
+    if (leftArr[i] < rightArr[j]) {
+      result.push(leftArr[i]);
       i++;
     } else {
-      result.push(arr2[j]);
+      result.push(rightArr[j]);
       j++;
     }
   }
-  return result.concat(i < j ? arr1.slice(i) : arr2.slice(j));
+  return result.concat(i < j ? leftArr.slice(i) : rightArr.slice(j));
 }
 
 // unit tests
